@@ -75,6 +75,8 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.3)
+    autoprefixer-rails (10.4.19.0)
+      execjs (~> 2)
     backport (1.2.0)
     base64 (0.2.0)
     bcrypt_pbkdf (1.1.1)
@@ -83,6 +85,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
+    bootstrap (5.3.3)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 2.11.8, < 3)
     brakeman (7.0.0)
       racc
     builder (3.3.0)
@@ -99,6 +104,9 @@ GEM
     connection_pool (2.5.0)
     crass (1.0.6)
     csv (3.3.3)
+    dartsass-rails (0.5.1)
+      railties (>= 6.0.0)
+      sass-embedded (~> 1.63)
     date (3.4.1)
     debug (1.10.0)
       irb (~> 1.10)
@@ -110,6 +118,7 @@ GEM
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    execjs (2.10.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     fugit (1.11.1)
@@ -117,6 +126,15 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (4.30.1)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.30.1-aarch64-linux)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.30.1-x86_64-linux)
+      bigdecimal
+      rake (>= 13)
     httparty (0.22.0)
       csv
       mini_mime (>= 1.0.0)
@@ -203,6 +221,7 @@ GEM
     parser (3.3.7.2)
       ast (~> 2.4.1)
       racc
+    popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -297,6 +316,18 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
+    sass-embedded (1.86.0-aarch64-linux-gnu)
+      google-protobuf (~> 4.30)
+    sass-embedded (1.86.0-aarch64-linux-musl)
+      google-protobuf (~> 4.30)
+    sass-embedded (1.86.0-arm-linux-gnueabihf)
+      google-protobuf (~> 4.30)
+    sass-embedded (1.86.0-arm-linux-musleabihf)
+      google-protobuf (~> 4.30)
+    sass-embedded (1.86.0-x86_64-linux-gnu)
+      google-protobuf (~> 4.30)
+    sass-embedded (1.86.0-x86_64-linux-musl)
+      google-protobuf (~> 4.30)
     securerandom (0.4.1)
     selenium-webdriver (4.30.1)
       base64 (~> 0.2)
@@ -400,8 +431,10 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  bootstrap (~> 5.3.3)
   brakeman
   capybara
+  dartsass-rails
   debug
   faker
   httparty

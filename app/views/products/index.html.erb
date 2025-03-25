@@ -1,16 +1,18 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+    <p style="color: green"><%= notice %></p>
+    
+    <% content_for :title, "Products" %>
+    
+    <h1>Products</h1>
+    
+    <div id="products" class="row g-4">
+      <% @products.each do |product| %>
+        <a href=products/<%= product.id %> class="productIndexLink">
+            <%= render product %>
+        </a>
 
-<% content_for :title, "Products" %>
-
-<h1>Products</h1>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-  <% end %>
+      <% end %>
+    </div>
+    
+    <%# <%= link_to "New product", new_product_path %>
 </div>
-
-<%= link_to "New product", new_product_path %>

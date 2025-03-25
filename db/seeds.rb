@@ -9,12 +9,12 @@ require "faker"
 # Category data
 # Category.destroy_all
 
-# Category.create(name: "Home")
-# Category.create(name: "Office")
-# Category.create(name: "Outdoor")
-# Category.create(name: "Dining")
+Category.create(name: "Home")
+Category.create(name: "Office")
+Category.create(name: "Outdoor")
+Category.create(name: "Dining")
 
-# puts "Created a total of #{Category.count} categories."
+puts "Created a total of #{Category.count} categories."
 
 
 def proper_price(price)
