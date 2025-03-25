@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1 or /products/1.json
   def show
+    @category = Category.find_by(id: @product.category_id)
   end
 
   # GET /products/new
