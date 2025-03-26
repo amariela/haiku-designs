@@ -6,7 +6,8 @@ class ProductsController < ApplicationController
     @products = Product.all
 
     if params[:searchQuery].present?
-      @products = @products.where("LOWER(name) LIKE ?", "%#{params[:searchQuery].downcase}%")
+      search_term = "%#{params[:searchQuery].downcase}%"
+      @products = @products.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?", search_term, search_term)
     end
 
     if params[:categoryDropdown].present? && params[:categoryDropdown] != "All Categories"
