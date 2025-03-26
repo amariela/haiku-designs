@@ -24,7 +24,7 @@
   </head>
 
   <body>    
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-4">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-4 fixed-top">
         <a class="navbar-brand" href="#">Haiku Designs</a>
         <button
             class="navbar-toggler d-lg-none"
@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav me-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#" aria-current="page">All Products<span class="visually-hidden">(current)</span></a
+                    <a class="nav-link active" href="/products" aria-current="page">All Products<span class="visually-hidden">(current)</span></a
                     >
                 </li>
                 <li class="nav-item dropdown">
@@ -71,10 +71,12 @@
             </form> %>
         </div>
     </nav>
-    
-    
-    
-    <%= yield %>
+
+    <main class="container my-auto py-5">
+        <%= yield %>
+    </main>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
