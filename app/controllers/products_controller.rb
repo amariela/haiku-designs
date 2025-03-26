@@ -15,7 +15,8 @@ class ProductsController < ApplicationController
       @products = @products.where(category_id: category.id) if category
     end
 
-    @products_total = @products.count
+    @products_total = @products.count # count before paging to avoid inaccurate count
+    @products = @products.order(:name).page(params[:page])
   end
 
   # GET /products/1 or /products/1.json

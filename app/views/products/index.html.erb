@@ -36,6 +36,8 @@
             <p class="text-muted text-center">No products found matching your search.</p>
         <% end %>
     </div>
-    
+
+    <%= paginate @products, theme: "bootstrap-5", nav_class: "pt-5" %>
+
     <%# <%= link_to "New product", new_product_path %>
 </div>
