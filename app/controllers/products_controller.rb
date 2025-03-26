@@ -4,6 +4,17 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products = Product.all
+
+    if params[:searchQuery].present?
+      @products = @products.where("LOWER(name) LIKE ?", "%#{params[:searchQuery].downcase}%")
+    end
+
+    if params[:categoryDropdown].present? && params[:categoryDropdown] != "All Categories"
+      category = Category.find_by(name: params[:categoryDropdown])
+      @products = @products.where(category_id: category.id) if category
+    end
+
+    @products_total = @products.count
   end
 
   # GET /products/1 or /products/1.json
