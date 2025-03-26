@@ -1,0 +1,42 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+div.productCard {
+    width: 300px;
+    min-height: 300px;
+    box-shadow: 2px 2px 10px gray;
+}
+
+.productCard:hover {
+    transform: scale(1.05, 1.05);
+    background-color: #ededed;
+    transition: all 0.2s ease-in-out;
+}
+
+.productName {
+    font-size: 1.2rem;
+}
+
+a.productIndexLink {
+    text-decoration: none;
+    width: auto;
+}
+
+a#githubLink {
+    text-decoration: none;
+    color: gray;
+}
+
+button.btn {
+    width: min-content;
+}
