@@ -1,0 +1,20 @@
+<div class="container">
+    <p style="color: green"><%= notice %></p>
+    
+    <%= render @category %>
+    
+    <div id="products" class="row g-4">
+        <% @products.each do |product| %>
+            <a href=/products/<%= product.id %> class="productIndexLink">
+                <div class="card productCard">
+                    <div class="card-body">
+                        <h4 class="card-title productName"><%= product.name %></h4>
+                        <h6 class="card-subtitle text-muted">$<%= product.price %></h6>
+                        <img src="../furniture-holder.jpg" alt="dummy picture" class="productImg" width="200"/>
+                    </div>
+                </div>
+            </a>
+        <% end %>
+    </div>
+    
+</div>

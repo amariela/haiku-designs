@@ -1,0 +1,43 @@
+<div class="container">
+    <p style="color: green"><%= notice %></p>
+    
+    <% content_for :title, "Furniture Products" %>
+    
+    <div class="row">
+        <div class="col">
+            <h1>All Products</h1>
+            <h6 class="text-muted pb-2">Found <%= @products_total %> products.</h6>
+        </div>
+        <div class="col align-content-center">
+            <div class="container d-flex flex-row justify-content-end align-items-end">
+            <%= form_with url: products_path, method: :get, local: true, class: "d-flex" do %>
+                <%= text_field_tag :searchQuery, params[:searchQuery], class: "form-control form-control-sm me-2", placeholder: "Search" %>
+
+                <%= select_tag :categoryDropdown, 
+                    options_for_select([["All Categories", nil]] + Category.order(:name).pluck(:name, :name), selected: params[:categoryDropdown]), 
+                    class: "form-select form-select-sm me-2" %>
+
+                <%= submit_tag "Search", class: "btn btn-outline-dark btn-sm" %>
+            <% end %>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div id="products" class="row g-4">
+        <% if @products.any? %>
+            <% @products.each do |product| %>
+                <a href=products/<%= product.id %> class="productIndexLink">
+                    <%= render product %>
+                </a>
+            <% end %>
+        <% else %>
+            <p class="text-muted text-center">No products found matching your search.</p>
+        <% end %>
+    </div>
+
+    <%= paginate @products, theme: "bootstrap-5", nav_class: "pt-5" %>
+
+    <%# <%= link_to "New product", new_product_path %>
+</div>

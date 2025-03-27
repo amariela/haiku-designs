@@ -1,10 +1,22 @@
 source "https://rubygems.org"
 
+# For seed data
+gem "faker"
+gem "nokogiri"
+gem "httparty"
 
 # Active Admin
 gem "activeadmin"
 gem "devise"
 gem "sassc"
+
+# Styling
+gem "dartsass-rails"
+gem "bootstrap", "~> 5.3.3"
+
+# Pagination
+gem "kaminari"
+gem "bootstrap5-kaminari-views"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.0"
