@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_26_225449) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_29_013436) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -54,5 +54,42 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_26_225449) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.decimal "pst_rate"
+    t.decimal "gst_rate"
+    t.decimal "hst_rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name", limit: 50
+    t.string "last_name", limit: 50
+    t.string "address", limit: 255
+    t.string "postal_code", limit: 6
+    t.string "phone_number", limit: 11
+    t.string "city", limit: 50
+    t.string "country", limit: 6, default: "Canada"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "province_id", null: false
+    t.integer "role_id", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["province_id"], name: "index_users_on_province_id"
+    t.index ["role_id"], name: "index_users_on_role_id"
+  end
+
   add_foreign_key "products", "categories"
+  add_foreign_key "users", "provinces"
+  add_foreign_key "users", "roles"
 end
