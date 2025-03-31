@@ -137,3 +137,22 @@
 
 # Role.create!(name: 'customer') if Rails.env.development?
 
+# provinces = [
+#   { name: "AB", pst_rate: 0, gst_rate: 0.05, hst_rate: 0 },  # Alberta: Only GST
+#   { name: "BC", pst_rate: 0.07, gst_rate: 0.05, hst_rate: 0 },  # British Columbia: GST + PST
+#   { name: "MB", pst_rate: 0.07, gst_rate: 0.05, hst_rate: 0 },  # Manitoba: GST + PST
+#   { name: "NB", pst_rate: 0, gst_rate: 0, hst_rate: 0.15 },   # New Brunswick: Only HST
+#   { name: "NL", pst_rate: 0, gst_rate: 0, hst_rate: 0.15 },   # Newfoundland and Labrador: Only HST
+#   { name: "NT", pst_rate: 0, gst_rate: 0.05, hst_rate: 0 },   # Northwest Territories: Only GST
+#   { name: "NS", pst_rate: 0, gst_rate: 0, hst_rate: 0.14 },   # Nova Scotia: Only HST (As of 2025, it's 14%)
+#   { name: "NU", pst_rate: 0, gst_rate: 0.05, hst_rate: 0 },   # Nunavut: Only GST
+#   { name: "ON", pst_rate: 0, gst_rate: 0, hst_rate: 0.13 },   # Ontario: Only HST
+#   { name: "PE", pst_rate: 0, gst_rate: 0, hst_rate: 0.15 },   # Prince Edward Island: Only HST
+#   { name: "QC", pst_rate: 0.09975, gst_rate: 0.05, hst_rate: 0 }, # Quebec: GST + QST
+#   { name: "SK", pst_rate: 0.06, gst_rate: 0.05, hst_rate: 0 },  # Saskatchewan: GST + PST
+#   { name: "YT", pst_rate: 0, gst_rate: 0.05, hst_rate: 0 }    # Yukon: Only GST
+# ]
+
+# provinces.each do |province|
+#   Province.create!(province)
+# end
