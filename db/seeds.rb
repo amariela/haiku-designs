@@ -136,3 +136,4 @@
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 # Role.create!(name: 'customer') if Rails.env.development?
+
