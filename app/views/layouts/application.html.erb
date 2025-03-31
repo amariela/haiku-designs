@@ -56,7 +56,14 @@
             </ul>
             <ul class="navbar-nav mt-2 mt-lg-0">
                 <% if user_signed_in? %>
-                    <li class="nav-item"><a class="nav-link" href="/users/sign_out">Sign Out</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" disabled>Hello, <%= current_user.email %>!</a>
+                </li>
+                <li class="nav-item">
+                    <%= form_with url: destroy_user_session_path, method: :delete, class: "d-inline" do |form| %>
+                        <%= form.submit "Sign Out", class: "nav-link btn btn-link" %>
+                    <% end %>
+                </li>
                 <% else %>
                     <li class="nav-item"><a class="nav-link" href="/users/sign_in">Log In</a></li>
                     <li class="nav-item"><a class="nav-link" href="/users/sign_up">Register</a></li>
@@ -65,7 +72,7 @@
         </div>
     </nav>
 
-    <main class="container mb-auto py-5">
+    <main class="container mb-auto py-5 mt-3">
         <%= yield %>
     </main>
 
