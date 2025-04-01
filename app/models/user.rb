@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :rememberable, :validatable
 
   belongs_to :role
+  has_one :shipment, dependent: :destroy
 
   before_validation :set_default_role, on: :create
 

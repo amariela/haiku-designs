@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   resources :products
   resources :categories
+  resource :shipment, only: [ :create, :show, :edit, :update, :new ]
+  # get "/shipments", to: "shipments#show", as: "user_shipment"
+  # get "/shipments/edit", to: "shipments#edit", as: "edit_shipment"
+  # get "/shipments/new", to: "shipments#new", as: "new_shipment"
+  # patch "/shipments", to: "shipments#update"
+
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: {

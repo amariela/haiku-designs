@@ -1,0 +1,13 @@
+<h1>Shipping Details</h1>
+
+<p><strong>First Name:</strong> <%= @shipment.first_name %></p>
+<p><strong>Last Name:</strong> <%= @shipment.last_name %></p>
+<p><strong>Phone Number:</strong> <%= @shipment.phone_number %></p>
+<p><strong>Address:</strong> <%= @shipment.address %></p>
+<p><strong>City:</strong> <%= @shipment.city %></p>
+<p><strong>Province:</strong> <%= @shipment.province.name %></p>
+<p><strong>Postal Code:</strong> <%= @shipment.postal_code %></p>
+<p><strong>Country:</strong> <%= @shipment.country %></p>
+
+<%= link_to "Edit", edit_shipment_path(@shipment), class: "btn btn-primary" %>
+<%= link_to "Back", root_path, class: "btn btn-secondary" %>

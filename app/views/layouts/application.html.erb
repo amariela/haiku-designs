@@ -57,13 +57,28 @@
             <ul class="navbar-nav mt-2 mt-lg-0">
                 <% if user_signed_in? %>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" disabled>Hello, <%= current_user.email %>!</a>
+                    <a class="nav-link text-white" href="#" style="pointer-events:none;">Hello, <%= current_user.email %>!</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                        href="#"
+                        id="dropdownAccount"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                        My Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownAccount">
+                        <%= link_to "Address", shipment_path, class: "nav-link text-dark" %>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <%= form_with url: destroy_user_session_path, method: :delete, class: "d-inline" do |form| %>
                         <%= form.submit "Sign Out", class: "nav-link btn btn-link" %>
                     <% end %>
                 </li>
+                
                 <% else %>
                     <li class="nav-item"><a class="nav-link" href="/users/sign_in">Log In</a></li>
                     <li class="nav-item"><a class="nav-link" href="/users/sign_up">Register</a></li>
@@ -73,6 +88,13 @@
     </nav>
 
     <main class="container mb-auto py-5 mt-3">
+        <% if flash[:notice] %>
+            <p class="text-success"><%= flash[:notice] %></p>
+        <% end %>
+
+        <% if flash[:alert] %>
+            <p class="text-danger"><%= flash[:alert] %></p>
+        <% end %>
         <%= yield %>
     </main>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_31_034210) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_31_141404) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -80,7 +80,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_31_034210) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "province_id", null: false
+    t.integer "user_id", null: false
     t.index ["province_id"], name: "index_shipments_on_province_id"
+    t.index ["user_id"], name: "index_shipments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,5 +98,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_31_034210) do
 
   add_foreign_key "products", "categories"
   add_foreign_key "shipments", "provinces"
+  add_foreign_key "shipments", "users"
   add_foreign_key "users", "roles"
 end
