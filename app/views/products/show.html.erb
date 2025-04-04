@@ -4,7 +4,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-4">
+        <div class="col-5">
+            <%= link_to "Back to products", products_path, class: "link-secondary link-offset-2 link-underline-opacity-25 mb-2" %>
             <img src="../furniture-holder.jpg" alt="dummy picture" class="productImg" width="400"/>
         </div>
         <div class="col">
@@ -16,8 +17,9 @@
             <p><%= @product.stock_quantity %></p>
             <h6>Category:</h6>
             <p><%= @category.name %></p>
-            <%= link_to "Back to products", products_path, class: "btn btn-dark mt-3" %>
-            <%= link_to "Add to Cart", products_path, class: "btn btn-success mt-3" %>
+            <div class="d-flex gap-2">
+                <%= render "cartBtn", product: @product %>
+            </div>
         </div>
     </div>
 </div>

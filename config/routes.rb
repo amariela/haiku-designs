@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
   resource :shipment, only: [ :create, :show, :edit, :update, :new ]
+  resource :cart, only: [ :show ] do
+    post "add/:product_id", to: "carts#add", as: "add"
+    patch "update/:product_id", to: "carts#update", as: "update"
+    delete "remove/:product_id", to: "carts#remove", as: "remove"
+  end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

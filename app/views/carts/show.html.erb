@@ -1,0 +1,40 @@
+<h1>Shopping Cart</h1>
+<% if @cart_items.any? %>
+  <div class="card shadow-sm" style="width: 80%">
+    <div class="card-body">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th class="text-center">Available Stock</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |product| %>
+            <tr>
+              <td><%= product.name %></td>
+              <td class="text-center"><%= product.stock_quantity %></td>
+              <td class="text-center">
+                <%= form_with url: update_cart_path(product.id), method: :patch, local: true, class: "d-inline" do %>
+                  <div class="input-group input-group-sm w-50 mx-auto">
+                    <%= number_field_tag "quantity", session[:cart][product.id.to_s], min: 1, max: product.stock_quantity, class: "form-control text-center" %>
+                    <button class="btn btn-outline-dark" type="submit">Update</button>
+                  </div>
+                <% end %>
+              </td>
+              <td class="text-end">
+                <%= button_to remove_cart_path(product.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm" do %>
+                  <i class="bi bi-trash"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <div class="alert alert-info">Your cart is empty.</div>
+<% end %>
