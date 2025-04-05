@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     patch "update/:product_id", to: "carts#update", as: "update"
     delete "remove/:product_id", to: "carts#remove", as: "remove"
   end
+  resource :checkout, only: [ :show ]
+
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

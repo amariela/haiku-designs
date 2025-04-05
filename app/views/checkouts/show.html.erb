@@ -1,0 +1,91 @@
+<div class="container my-5">
+  <h1 class="mb-4">Checkout</h1>
+
+  <div class="row">
+    <% if user_signed_in? %>
+      <div class="col mb-4">
+        <h4>Shipping Address</h4>
+        <%= render "shipments/edit", shipment: @shipment %>
+      </div>
+    <% end %>
+
+    <div class="col">
+      <h4>Invoice</h4>
+      <hr>
+      <div class="row mb-4">
+        <div class="col-6">
+          <h6>Billing Address</h6>
+          <% if @shipment.present? %>
+            <p class="small">
+              <strong><%= @shipment.first_name %> <%= @shipment.last_name %></strong><br>
+              <%= @shipment.address %><br>
+              <%= @shipment.city %>, <%= @shipment.province.name if @shipment.province %><br>
+              <%= @shipment.country %> - <%= @shipment.postal_code %><br>
+              Phone: <%= @shipment.phone_number %>
+            </p>
+          <% else %>
+            <p class="text-muted small">No address provided.</p>
+          <% end %>
+        </div>
+
+        <div class="col-6">
+          <h6>Company Address</h6>
+          <p class="small">
+            <strong>Haiku Designs</strong><br>
+            123 Commerce Street<br>
+            Winnipeg, MB<br>
+            Canada - R3C 0E2<br>
+            Phone: (418) 102-1345
+          </p>
+        </div>
+      </div>
+
+      <!-- Products Table -->
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>Product</th>
+            <th class="text-end">Price</th>
+            <th class="text-end">Quantity</th>
+            <th class="text-end">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |product| %>
+            <% quantity = @cart[product.id.to_s] %>
+            <% item_total = product.price * quantity %>
+            <tr>
+              <td><%= product.name %></td>
+              <td class="text-end">$<%= '%.2f' % product.price %></td>
+              <td class="text-end"><%= quantity %></td>
+              <td class="text-end">$<%= '%.2f' % item_total %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <!-- Totals Section -->
+      <div class="mt-4 p-3 border rounded bg-light">
+        <div class="d-flex justify-content-between mb-2">
+          <span><strong>Subtotal:</strong></span>
+          <span>$<%= '%.2f' % @subtotal %></span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span><strong>Taxes:</strong></span>
+          <span>$<%= '%.2f' % @tax_amount %></span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span><strong>Shipping:</strong></span>
+          <span>$<%= '%.2f' % @shipping_cost %></span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <h5><strong>Grand Total:</strong></h5>
+          <h5><strong>$<%= '%.2f' % @grand_total %></strong></h5>
+        </div>
+      </div>
+
+      <%= link_to "Confirm Purchase", new_shipment_path, class: "btn btn-success w-100 mt-4" %>
+    </div>
+  </div>
+</div>
