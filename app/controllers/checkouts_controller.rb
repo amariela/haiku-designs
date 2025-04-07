@@ -72,7 +72,7 @@ class CheckoutsController < ApplicationController
     ActiveRecord::Base.transaction do
       # Create the Order
       @order = user.orders.create!(
-        total_price: calculate_cart_total,
+        total_price: @grand_total,
         gst_total: @gst_total,
         pst_total: @pst_total,
         hst_total: @hst_total,
@@ -117,14 +117,6 @@ class CheckoutsController < ApplicationController
     default_province_id = 1 # ALBERTA is default for now
     # Create a default shipment for the guest if one does not exist
     Shipment.create!(user: user, province_id: default_province_id)
-  end
-
-  def calculate_cart_total
-    @cart = session[:cart]
-    @cart.sum do |product_id, quantity|
-      product = Product.find(product_id)
-      product.price * quantity
-    end + 10.00 # shipping cost
   end
 
   def reset_session_cart
