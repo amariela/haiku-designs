@@ -6,6 +6,10 @@ class Shipment < ApplicationRecord
   before_validation :normalize_postal_code, :set_default_country
   before_validation :set_province_id
 
+  def self.ransackable_attributes(auth_object = nil)
+    [ "address", "city", "country", "created_at", "first_name", "id", "id_value", "last_name", "phone_number", "postal_code", "province_id", "updated_at", "user_id" ]
+  end
+
   private
 
   def normalize_postal_code
