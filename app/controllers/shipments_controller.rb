@@ -25,7 +25,9 @@ class ShipmentsController < ApplicationController
   end
 
   def update
-    redirect_to new_shipment_path if @shipment.nil?
+    if @shipment.nil?
+      redirect_to new_shipment_path and return
+    end
     if @shipment.update(shipment_params)
       flash[:notice] = "Shipping details updated successfully."
       redirect_to shipment_path

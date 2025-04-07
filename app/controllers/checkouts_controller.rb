@@ -11,12 +11,17 @@ class CheckoutsController < ApplicationController
       @subtotal += product.price * quantity
     end
 
-    # Get province tax rates
+    # Get tax rates
     gst_rate = @shipment&.province&.gst_rate || 0
     pst_rate = @shipment&.province&.pst_rate || 0
     hst_rate = @shipment&.province&.hst_rate || 0
 
-    # Calculate tax and total
+    # Tax rates for view
+    @gst_rate = gst_rate
+    @pst_rate = pst_rate
+    @hst_rate = hst_rate
+
+    # Calculate totals
     total_tax_rate = gst_rate + pst_rate + hst_rate
     @tax_amount = @subtotal * total_tax_rate
     @shipping_cost = 10.00
