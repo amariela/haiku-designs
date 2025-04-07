@@ -5,6 +5,7 @@
         <thead>
           <tr>
             <th>Product Name</th>
+            <th class="text-center">Unit Price</th>
             <th class="text-center">Available Stock</th>
             <th class="text-center">Quantity</th>
             <th class="text-end">Actions</th>
@@ -13,7 +14,8 @@
         <tbody>
           <% @cart_items.each do |product| %>
             <tr>
-              <td><%= product.name %></td>
+              <td><%= link_to product.name, product_path(product), class: "text-muted"%></td>
+              <td class="text-center">$<%= product.price %></td>
               <td class="text-center"><%= product.stock_quantity %></td>
               <td class="text-center">
                 <%= form_with url: update_cart_path(product.id), method: :patch, local: true, class: "d-inline" do %>
@@ -32,12 +34,9 @@
           <% end %>
         </tbody>
       </table>
-      <% if (not @cart_items.empty?) and user_signed_in? %>
-        <%= link_to "Checkout", checkout_path, class: "btn btn-dark btn-sm" %>
 
-      <% else %>
-        <p class="text-muted">Please <a class="text-muted" href="/users/sign_in">Log In</a> or <a class="text-muted" href="/users/sign_up">Register</a> to checkout.</p>
-      <% end %>
+    <%= link_to "Checkout", checkout_path, class: "btn btn-dark btn-sm" %>
+
 
 <% else %>
   <div class="alert alert-info">Your cart is empty.</div>

@@ -1,3 +1,12 @@
 <h1>Enter Shipping Details</h1>
-
+<% if @shipment.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>The following errors prevented saving:</h4>
+    <ul>
+      <% @shipment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <%= render "shipments/new", shipment: @shipment %>

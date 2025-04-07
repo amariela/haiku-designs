@@ -1,10 +1,7 @@
 class Shipment < ApplicationRecord
-  validates :first_name, :last_name, :address, :phone_number, :postal_code, :city, :province_id, :country, presence: true
-  validates :postal_code, format: {
-    with: /\A[A-Z]\d[A-Z]\d[A-Z]\d\z/, message: "Must follow the format A1A1A1"
-  }
+  validates :province_id, :country, presence: true
 
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :province
   before_validation :normalize_postal_code, :set_default_country
   before_validation :set_province_id

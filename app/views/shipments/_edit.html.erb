@@ -31,7 +31,7 @@
       </div>
       <div class="field w-50">
         <%= f.label :province %>
-        <%= f.collection_select :province_id, Province.all, :id, :name, { prompt: "Select Province" }, { class: "form-select" } %>
+        <%= f.collection_select :province_id, Province.all, :id, :name, { prompt: "Select Province" }, { class: "form-select", required: true } %>
       </div>
   </div>
 
