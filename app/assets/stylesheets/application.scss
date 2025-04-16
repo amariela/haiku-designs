@@ -14,9 +14,9 @@ body {
 
 
 div.productCard {
-    width: 300px;
-    min-height: 300px;
-    box-shadow: 2px 2px 10px gray;
+    box-shadow: 2px 2px 5px rgb(158, 158, 158);
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 .productCard:hover {
@@ -42,3 +42,24 @@ a#githubLink {
 button.btn {
     width: min-content;
 }
+
+.pagination .page-link {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #454d55;
+  }
+  
+  .pagination .page-link:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .pagination .active .page-link {
+    background-color: #212529;
+    border-color: #212529;
+  }
+  .page-item.disabled .page-link {
+    background-color: #ffffff;
+    border: 1px solid #454d55;
+    color: #000000;
+  }

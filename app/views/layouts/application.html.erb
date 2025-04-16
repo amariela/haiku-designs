@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "App" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><%= content_for(:title) || "Haiku Designs" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,106 +10,87 @@
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icon.png">
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   </head>
 
-  <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark text-white px-4 fixed-top">
-        <a class="navbar-brand" href="/">Haiku Designs</a>
-        <button
-            class="navbar-toggler d-lg-none"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-        </button>
-        <div class="collapse navbar-collapse container" id="collapsibleNavId">
-            <ul class="navbar-nav mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/products">All Products</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="dropdownId"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        >By Category</a
-                    >
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="/categories/4">Dining</a>
-                        <a class="dropdown-item" href="/categories/1">Home</a>
-                        <a class="dropdown-item" href="/categories/2">Office</a>
-                        <a class="dropdown-item" href="/categories/3">Outdoor</a>
-                    </div>
-                </li>
+  <body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm fixed-top px-4">
+      <a class="navbar-brand" href="/">Haiku Designs</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/products">All Products</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" data-bs-toggle="dropdown">
+              By Category
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="categoryDropdown">
+              <li><a class="dropdown-item" href="/categories/4">Dining</a></li>
+              <li><a class="dropdown-item" href="/categories/1">Home</a></li>
+              <li><a class="dropdown-item" href="/categories/2">Office</a></li>
+              <li><a class="dropdown-item" href="/categories/3">Outdoor</a></li>
             </ul>
-            <ul class="navbar-nav mt-2 mt-lg-0">
-                <% if user_signed_in? %>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#" style="pointer-events:none;">Hello, <%= current_user.email %>!</a>
-                </li>
-                
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"
-                        href="#"
-                        id="dropdownAccount"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        My Account
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownAccount">
-                        <%= link_to "Address", shipment_path, class: "nav-link text-dark" %>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <%= form_with url: destroy_user_session_path, method: :delete, class: "d-inline" do |form| %>
-                        <%= form.submit "Sign Out", class: "nav-link btn btn-link" %>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <span class="nav-link disabled">Hello, <%= current_user.email %>!</span>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" data-bs-toggle="dropdown">
+                My Account
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accountDropdown">
+                <li><%= link_to "Address", shipment_path, class: "dropdown-item" %></li>
+                <li>
+                    <%= form_with url: destroy_user_session_path, method: :delete do |form| %>
+                        <%= form.submit "Sign Out", class: "btn btn-link my-auto dropdown-item text-white" %>
                     <% end %>
                 </li>
-                
-                <% else %>
-                    <li class="nav-item"><a class="nav-link" href="/users/sign_in">Log In</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/users/sign_up">Register</a></li>
-                <% end %>
-                <li class="nav-item">
-                    <a class="btn btn-dark" href="/cart"><i class="bi bi-cart"></i></a>
-                </li>
-            </ul>
-        </div>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item"><a class="nav-link" href="/users/sign_in">Log In</a></li>
+            <li class="nav-item"><a class="nav-link" href="/users/sign_up">Register</a></li>
+          <% end %>
+          <li class="nav-item ms-2">
+            <a class="btn btn-dark position-relative" href="/cart">
+              <i class="bi bi-cart"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </nav>
 
-    <main class="container mb-auto py-5 mt-3">
-        <% if flash[:notice] %>
-            <p class="text-success"><%= flash[:notice] %></p>
-        <% end %>
-
-        <% if flash[:alert] %>
-            <p class="text-danger"><%= flash[:alert] %></p>
-        <% end %>
-        <%= yield %>
+    <main class="container my-5 pt-5 flex-grow-1">
+      <% if flash[:notice] %>
+        <div class="alert alert-success mt-3"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger mt-3"><%= flash[:alert] %></div>
+      <% end %>
+      <%= yield %>
     </main>
 
-    <footer class="bg-dark text-white py-2">
-        <nav class="nav justify-content-center">
-            <span class="pe-1">Made with &hearts; by</span><a href="https://github.com/amariela/haiku-designs" rel="noreferrer" id="githubLink">amariela</a>.
-        </nav>
+    <footer class="bg-dark text-center text-white py-3 mt-auto">
+      <span>Made with <span style="color: red;">&hearts;</span> by <a href="https://github.com/amariela/haiku-designs" class="link-light">amariela</a>.</span>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   </body>
 </html>

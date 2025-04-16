@@ -1,25 +1,49 @@
 <% content_for :title, "#{@product.name} | Haiku Designs" %>
 
-<p style="color: green"><%= notice %></p>
+<% if notice.present? %>
+  <div class="alert alert-success mt-4 rounded-pill shadow-sm text-center fw-medium">
+    <%= notice %>
+  </div>
+<% end %>
 
-<div class="container">
-    <div class="row">
-        <div class="col-5">
-            <%= link_to "Back to products", products_path, class: "link-secondary link-offset-2 link-underline-opacity-25 mb-2" %>
-            <img src="../furniture-holder.jpg" alt="dummy picture" class="productImg" width="400"/>
-        </div>
-        <div class="col">
-            <h1 class="pb-2"><%= @product.name %></h1>
-            <h3 class="text-muted pb-2">$<%= @product.price %></h3>
-            <h6>Description:</h6>
-            <p><%= @product.description %></p>
-            <h6>Stock Available:</h6>
-            <p><%= @product.stock_quantity %></p>
-            <h6>Category:</h6>
-            <p><%= @category.name %></p>
-            <div class="d-flex gap-2">
-                <%= render "cartBtn", product: @product %>
-            </div>
-        </div>
+<div class="container py-5">
+  <%= link_to "← Back to Products", products_path, class: "text-decoration-none text-secondary mb-4 d-inline-block fw-semibold" %>
+
+  <div class="row align-items-center g-5">
+    <!-- Image Section -->
+    <div class="col-md-6 text-center">
+      <div class="bg-light rounded-4 shadow-sm p-3">
+        <img src="/furniture-holder.jpg" alt="Product image" class="img-fluid rounded-3" style="max-height: 420px; object-fit: cover;">
+      </div>
     </div>
+
+    <!-- Info Section -->
+    <div class="col-md-6">
+      <h1 class="fw-bold display-5 mb-3"><%= @product.name %></h1>
+      <p class="fs-4 text-muted mb-4">$<%= number_with_precision(@product.price, precision: 2) %></p>
+
+      <div class="mb-4">
+        <h6 class="text-uppercase text-secondary fw-semibold small">Description</h6>
+        <p class="text-body-emphasis"><%= @product.description %></p>
+      </div>
+
+      <div class="mb-4">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h6 class="text-uppercase text-secondary fw-semibold small mb-1">Stock Available</h6>
+            <p class="text-body"><%= @product.stock_quantity %> in stock</p>
+          </div>
+          <div>
+            <h6 class="text-uppercase text-secondary fw-semibold small mb-1">Category</h6>
+            <p class="text-body"><%= @category.name %></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart Button -->
+      <div class="d-grid gap-2 d-md-block">
+        <%= render "cartBtn", product: @product %>
+      </div>
+    </div>
+  </div>
 </div>

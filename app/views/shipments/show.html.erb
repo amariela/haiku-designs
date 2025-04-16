@@ -1,12 +1,33 @@
-<h1>Shipping Details</h1>
+<h1 class="mb-4">Shipping Details</h1>
 
-<p><strong>First Name:</strong> <%= @shipment.first_name %></p>
-<p><strong>Last Name:</strong> <%= @shipment.last_name %></p>
-<p><strong>Phone Number:</strong> <%= @shipment.phone_number %></p>
-<p><strong>Address:</strong> <%= @shipment.address %></p>
-<p><strong>City:</strong> <%= @shipment.city %></p>
-<p><strong>Province:</strong> <%= @shipment.province.name %></p>
-<p><strong>Postal Code:</strong> <%= @shipment.postal_code %></p>
-<p><strong>Country:</strong> <%= @shipment.country %></p>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-4">First Name</dt>
+      <dd class="col-sm-8"><%= @shipment.first_name %></dd>
 
-<%= link_to "Edit", edit_shipment_path(@shipment), class: "btn btn-primary" %>
+      <dt class="col-sm-4">Last Name</dt>
+      <dd class="col-sm-8"><%= @shipment.last_name %></dd>
+
+      <dt class="col-sm-4">Phone Number</dt>
+      <dd class="col-sm-8"><%= @shipment.phone_number %></dd>
+
+      <dt class="col-sm-4">Address</dt>
+      <dd class="col-sm-8"><%= @shipment.address %></dd>
+
+      <dt class="col-sm-4">City</dt>
+      <dd class="col-sm-8"><%= @shipment.city %></dd>
+
+      <dt class="col-sm-4">Province</dt>
+      <dd class="col-sm-8"><%= @shipment.province.name %></dd>
+
+      <dt class="col-sm-4">Postal Code</dt>
+      <dd class="col-sm-8"><%= @shipment.postal_code %></dd>
+
+      <dt class="col-sm-4">Country</dt>
+      <dd class="col-sm-8"><%= @shipment.country %></dd>
+    </dl>
+
+    <%= link_to "Edit", edit_shipment_path(@shipment), class: "btn btn-primary mt-3" %>
+  </div>
+</div>
