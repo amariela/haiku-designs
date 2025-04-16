@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     get "error", to: "checkouts#error"
   end
 
+  if Rails.env.development? || Rails.env.test?
+    post "/testing/reset", to: "testing#reset_test_users_registered"
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: {

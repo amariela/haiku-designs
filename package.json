@@ -1,5 +1,10 @@
 {
-  "devDependencies": {
-    "cypress": "^14.3.0"
+    "scripts": {
+        "dev": "rails s",
+        "cypress:open": "start-server-and-test dev http://localhost:3000 'cypress open'"
+},
+    "devDependencies": {
+        "cypress": "^14.3.0",
+        "start-server-and-test": "^2.0.11"
   }
 }
