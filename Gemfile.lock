@@ -451,6 +451,8 @@ DEPENDENCIES
   nokogiri
   puma (>= 5.0)
   rails (~> 7.2.0)
+  rubocop
+  rubocop-rails
   rubocop-rails-omakase
   sassc
   selenium-webdriver

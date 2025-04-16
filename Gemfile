@@ -18,6 +18,10 @@ gem "bootstrap", "~> 5.3.3"
 gem "kaminari"
 gem "bootstrap5-kaminari-views"
 
+# Rubocop
+gem "rubocop"
+gem "rubocop-rails"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.0"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
