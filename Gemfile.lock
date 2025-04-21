@@ -88,8 +88,6 @@ GEM
       activesupport (>= 3.0.0)
       ruby2_keywords (>= 0.0.2)
     ast (2.4.3)
-    autoprefixer-rails (10.4.19.0)
-      execjs (~> 2)
     base64 (0.2.0)
     bcrypt (3.1.20)
     benchmark (0.4.0)
@@ -97,8 +95,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    bootstrap (5.3.3)
-      autoprefixer-rails (>= 9.1.0)
+    bootstrap (5.3.5)
       popper_js (>= 2.11.8, < 3)
     bootstrap5-kaminari-views (0.0.1)
       kaminari (>= 0.13)
@@ -134,7 +131,6 @@ GEM
       warden (~> 1.2.3)
     drb (2.2.1)
     erubi (1.13.1)
-    execjs (2.10.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     ffi (1.17.1-aarch64-linux-gnu)
@@ -436,7 +432,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bootsnap
-  bootstrap (~> 5.3.3)
+  bootstrap (~> 5.3.5)
   bootstrap5-kaminari-views
   brakeman
   capybara
