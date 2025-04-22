@@ -67,15 +67,15 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm install
         
-      - name: Pull and run Docker container
+      - name: Wait for the server to be ready
         run: |
           docker pull $DOCKER_IMAGE
           docker run -d -p 3000:3000 $DOCKER_IMAGE
-          sleep 10
+          npx wait-on http://localhost:3000 --timeout 30000
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
           wait-on: http://localhost:3000
-          wait-on-timeout: 60
+          wait-on-timeout: 120
           browser: chrome
