@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
-      - name: Set up SQLite test database
+      - name: Set up SQLite database
         run: |
           cp config/database.yml.ci config/database.yml
           mkdir -p storage
