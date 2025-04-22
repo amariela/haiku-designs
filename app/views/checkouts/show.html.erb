@@ -139,8 +139,8 @@
                 <p><strong>GST:</strong> <%= @gst_rate * 100 %>%</p>
                 <p><strong>PST:</strong> <%= @pst_rate * 100 %>%</p>
                 <p><strong>HST:</strong> <%= @hst_rate * 100 %>%</p>
-                <p><strong>Total Tax:</strong> $<%= '%.2f' % @tax_amount %></p>
               </div>
+              <p class="text-end"><strong>Total Tax:</strong> $<%= '%.2f' % @tax_amount %></p>
             <% end %>
           </div>
 
@@ -153,7 +153,7 @@
 
           <div class="d-flex justify-content-between">
             <h5><strong>Grand Total:</strong></h5>
-            <h5><strong>$<%= '%.2f' % @grand_total %></strong></h5>
+            <h5><strong>$<%= '%.2f' % @grand_total %> CAD</strong></h5>
           </div>
         </div>
 
