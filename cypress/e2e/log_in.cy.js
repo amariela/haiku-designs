@@ -8,8 +8,8 @@ describe('Log In Form', () => {
         cy.get('input[type=password').type('bobthebuilder')
         cy.get('input[type=submit]').contains('Log in').click()
 
-        cy.get('p.text-success').should('include.text', 'Signed in successfully.')
-        cy.get('a.nav-link').should('include.text', 'Hello, bob@builder.com!')
+        cy.get('div.alert-success').should('include.text', 'Signed in successfully.')
+        cy.get('span.nav-link.disabled').should('include.text', 'Hello, bob@builder.com!')
     })
 
     it('displays error message when incorrect email is used', () => {
@@ -17,7 +17,7 @@ describe('Log In Form', () => {
         cy.get('input[type=password').type('bobthebuilder')
         cy.get('input[type=submit]').contains('Log in').click()
 
-        cy.get('p.text-danger').should('include.text', 'Invalid Email or password.')
+        cy.get('div.alert-danger').should('include.text', 'Invalid Email or password.')
         cy.url().should('include', '/users/sign_in')
     })
 
@@ -26,7 +26,7 @@ describe('Log In Form', () => {
         cy.get('input[type=password').type('testing')
         cy.get('input[type=submit]').contains('Log in').click()
 
-        cy.get('p.text-danger').should('include.text', 'Invalid Email or password.')
+        cy.get('div.alert-danger').should('include.text', 'Invalid Email or password.')
         cy.url().should('include', '/users/sign_in')
     })
 })

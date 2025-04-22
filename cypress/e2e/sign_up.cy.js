@@ -8,18 +8,18 @@ describe('Sign Up form', () => {
         cy.get('input#user_email').type('test@email.com')
         cy.get('input#user_password').type('test123')
         cy.get('input#user_password_confirmation').type('test123')
-        cy.get('input').contains('Sign up').click()
+        cy.get('input[value="Sign Up"]').click()
 
         // Assert that user is at home page and sees welcome message
         cy.url().should('equal', 'http://localhost:3000/')
-        cy.get('p.text-success').should('include.text', 'Welcome! You have signed up successfully.')
+        cy.get('div.alert-success').should('include.text', 'Welcome! You have signed up successfully.')
     })
 
     it('prevents invalid email address from submitting', () => {
         cy.get('input#user_email').type('test')
         cy.get('input#user_password').type('test123')
         cy.get('input#user_password_confirmation').type('test123')
-        cy.get('input').contains('Sign up').click()
+        cy.get('input[value="Sign Up"]').click()
 
         // Assert that the email field is invalid
         cy.get('input#user_email').then(($input) => {
@@ -34,7 +34,7 @@ describe('Sign Up form', () => {
         cy.get('input#user_email').type('test@email.com')
         cy.get('input#user_password').type('12345')
         cy.get('input#user_password_confirmation').type('12345')
-        cy.get('input').contains('Sign up').click()
+        cy.get('input[value="Sign Up"]').click()
 
         cy.get('div#error_explanation').should('include.text', 'Password is too short (minimum is 6 characters)')
     })
