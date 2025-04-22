@@ -10,6 +10,6 @@ COPY . .
 RUN bundle install
 
 RUN mkdir -p db
-COPY ./db/development.sqlite3 ./db/development.sqlite3
+COPY ./storage/development.sqlite3 ./storage/development.sqlite3
 
 EXPOSE 3000
