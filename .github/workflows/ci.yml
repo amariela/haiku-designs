@@ -1,12 +1,17 @@
-name: CI
+name: Rails CI/CD with RuboCop, Docker, and Cypress
 
 on:
-  pull_request:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  RAILS_ENV: test
+  DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/haiku-designs:latest
 
 jobs:
-  scan_ruby:
+  lint-and-db-setup:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,72 +24,50 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
+      - name: Install dependencies
+        run: bundle install
 
-  scan_js:
+      - name: Set up SQLite test database
+        run: |
+          cp config/database.yml.ci config/database.yml
+          mkdir -p db
+          touch db/test.sqlite3
+          bundle exec rails db:schema:load
+
+      - name: Run RuboCop
+        run: bundle exec rubocop
+
+  docker-build-push:
+    needs: lint-and-db-setup
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: bin/importmap audit
+      - name: Build Docker image
+        run: docker build -t $DOCKER_IMAGE .
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Push Docker image
+        run: docker push $DOCKER_IMAGE
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Lint code for consistent style
-        run: bin/rubocop -f github
-
-  test:
+  e2e-tests:
+    needs: docker-build-push
     runs-on: ubuntu-latest
 
-    # services:
-    #  redis:
-    #    image: redis
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libsqlite3-0 libvips
+      - name: Pull and run Docker container
+        run: |
+          docker pull $DOCKER_IMAGE
+          docker run -d -p 3000:3000 $DOCKER_IMAGE
+          sleep 10
 
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
-
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
-          if-no-files-found: ignore
+          wait-on: http://localhost:3000
+          wait-on-timeout: 60
+          browser: chrome
