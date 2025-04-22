@@ -7,9 +7,9 @@ RUN apt-get update -qq && apt-get install -y nodejs sqlite3
 
 COPY . .
 
-RUN bundle install
+RUN bundle install && npm install
 
-RUN mkdir -p db
+RUN mkdir -p storage
 COPY ./storage/development.sqlite3 ./storage/development.sqlite3
 
 EXPOSE 3000
