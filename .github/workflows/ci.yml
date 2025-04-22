@@ -30,7 +30,7 @@ jobs:
       - name: Set up SQLite test database
         run: |
           cp config/database.yml.ci config/database.yml
-          mkdir -p db
+          mkdir -p storage
           touch storage/development.sqlite3
           bundle exec rails db:schema:load
 
