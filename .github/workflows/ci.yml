@@ -61,6 +61,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install JavaScript dependencies
+        run: npm install
+        
       - name: Pull and run Docker container
         run: |
           docker pull $DOCKER_IMAGE
